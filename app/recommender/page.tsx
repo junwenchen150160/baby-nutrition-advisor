@@ -5,7 +5,9 @@ import { generateRecommendation, getPopularQuestions, RecommendationResult } fro
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Loader2, Baby, Heart, Brain, Lightbulb, ArrowLeft, Send } from "lucide-react";
 
 export default function RecommenderPage() {
   const [question, setQuestion] = useState("");
@@ -60,11 +62,16 @@ export default function RecommenderPage() {
           <div className="text-center mb-8">
             <Button 
               onClick={handleNewQuestion}
-              className="mb-4 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg"
+              variant="outline"
+              className="mb-4"
             >
-              ← 问新问题
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              问新问题
             </Button>
-            <h1 className="text-3xl font-bold text-gray-900 mb-4">🍼 营养建议</h1>
+            <div className="flex items-center justify-center mb-4">
+              <Baby className="h-12 w-12 text-primary mr-3" />
+              <h1 className="text-3xl font-bold text-gray-900">营养建议</h1>
+            </div>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               {result.category}
             </p>
@@ -84,7 +91,8 @@ export default function RecommenderPage() {
           <Card className="mb-6">
             <CardHeader>
               <CardTitle className="flex items-center">
-                ❤️ 专业建议
+                <Heart className="h-6 w-6 text-red-500 mr-2" />
+                专业建议
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -96,7 +104,8 @@ export default function RecommenderPage() {
           <Card className="mb-6">
             <CardHeader>
               <CardTitle className="flex items-center">
-                💡 实用小贴士
+                <Lightbulb className="h-6 w-6 text-yellow-500 mr-2" />
+                实用小贴士
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -115,19 +124,21 @@ export default function RecommenderPage() {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center">
-                🧠 相关问题
+                <Brain className="h-6 w-6 text-purple-500 mr-2" />
+                相关问题
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-2">
                 {result.relatedQuestions.map((relatedQ, index) => (
-                  <button
+                  <Button
                     key={index}
-                    className="w-full text-left p-3 text-sm border rounded-lg hover:bg-blue-50 transition-colors"
+                    variant="ghost"
+                    className="w-full text-left justify-start h-auto p-3 text-sm"
                     onClick={() => handleQuestionClick(relatedQ)}
                   >
                     <span className="text-blue-600 hover:text-blue-800">{relatedQ}</span>
-                  </button>
+                  </Button>
                 ))}
               </div>
             </CardContent>
@@ -143,7 +154,10 @@ export default function RecommenderPage() {
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">🍼 宝宝营养顾问</h1>
+          <div className="flex items-center justify-center mb-4">
+            <Baby className="h-12 w-12 text-primary mr-3" />
+            <h1 className="text-4xl font-bold text-gray-900">宝宝营养顾问</h1>
+          </div>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             专业的婴幼儿营养建议，基于科学育儿理念
           </p>
@@ -168,24 +182,25 @@ export default function RecommenderPage() {
               />
               
               {error && (
-                <Alert>
-                  <AlertDescription className="text-red-600">{error}</AlertDescription>
+                <Alert variant="destructive">
+                  <AlertDescription>{error}</AlertDescription>
                 </Alert>
               )}
 
               <Button 
                 type="submit" 
-                className="w-full h-12 text-lg font-semibold bg-blue-600 hover:bg-blue-700 text-white"
+                className="w-full h-12 text-lg font-semibold"
                 disabled={isLoading || !question.trim()}
               >
                 {isLoading ? (
                   <>
-                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                    <Loader2 className="h-5 w-5 mr-2 animate-spin" />
                     正在分析问题...
                   </>
                 ) : (
                   <>
-                    📤 获取专业建议
+                    <Send className="h-5 w-5 mr-2" />
+                    获取专业建议
                   </>
                 )}
               </Button>
@@ -196,20 +211,21 @@ export default function RecommenderPage() {
         {/* 热门问题 */}
         <Card>
           <CardHeader>
-            <CardTitle>🔥 热门问题</CardTitle>
+            <CardTitle>热门问题</CardTitle>
             <CardDescription>点击下方问题快速获取答案</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {popularQuestions.map((popularQ, index) => (
-                <button
+                <Button
                   key={index}
-                  className="h-auto p-4 text-left text-sm leading-relaxed border rounded-lg hover:bg-blue-50 transition-colors"
+                  variant="outline"
+                  className="h-auto p-4 text-left justify-start text-sm leading-relaxed"
                   onClick={() => handleQuestionClick(popularQ)}
                   disabled={isLoading}
                 >
                   <span className="text-gray-700">{popularQ}</span>
-                </button>
+                </Button>
               ))}
             </div>
           </CardContent>
