@@ -8,11 +8,11 @@ export interface RecommendationType {
 export interface BabyData {
   age: number;
   gender: "male" | "female";
-  weight?: number;
-  height?: number;
-  healthConditions?: string[];
-  allergies?: string[];
-  specialNotes?: string;
-  feedingType?: "breastfeeding" | "formula" | "mixed";
-  sleepHours?: number;
+  weight: number;
+  height: number;
+  feedingMethod: "breastfeeding" | "formula" | "mixed";
+  sleepHours: number;
+  healthConditions: string;
+  allergies: string;
+  notes: string;
 }
