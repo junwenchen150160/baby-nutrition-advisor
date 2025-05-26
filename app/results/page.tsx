@@ -81,11 +81,11 @@ export default function ResultsPage() {
 - 性别：${babyData.gender === 'male' ? '男宝宝' : '女宝宝'}
 ${babyData.weight ? `- 体重：${babyData.weight}kg` : ''}
 ${babyData.height ? `- 身高：${babyData.height}cm` : ''}
-${babyData.feedingType ? `- 喂养方式：${getFeedingTypeText(babyData.feedingType)}` : ''}
+${babyData.feedingMethod ? `- 喂养方式：${getFeedingTypeText(babyData.feedingMethod)}` : ''}
 ${babyData.sleepHours ? `- 睡眠时间：${babyData.sleepHours}小时/天` : ''}
 ${babyData.healthConditions?.length ? `- 健康状况：${babyData.healthConditions.join('、')}` : ''}
 ${babyData.allergies?.length ? `- 过敏史：${babyData.allergies.join('、')}` : ''}
-${babyData.specialNotes ? `- 特殊说明：${babyData.specialNotes}` : ''}
+${babyData.notes ? `- 特殊说明：${babyData.notes}` : ''}
 
 ${recommendations.food}
 
@@ -215,10 +215,10 @@ ${recommendations.exercise}
                   <span className="text-sm">{babyData.sleepHours} 小时/天</span>
                 </div>
               )}
-              {babyData.feedingType && (
+              {babyData.feedingMethod && (
                 <div className="flex items-center gap-2">
                   <Heart className="h-4 w-4 text-red-500" />
-                  <span className="text-sm">{getFeedingTypeText(babyData.feedingType)}</span>
+                  <span className="text-sm">{getFeedingTypeText(babyData.feedingMethod)}</span>
                 </div>
               )}
             </div>
@@ -251,12 +251,12 @@ ${recommendations.exercise}
               </>
             )}
             
-            {babyData.specialNotes && (
+            {babyData.notes && (
               <>
                 <Separator className="my-4" />
                 <div>
                   <span className="text-sm font-medium">特殊说明：</span>
-                  <p className="text-sm text-muted-foreground mt-1">{babyData.specialNotes}</p>
+                  <p className="text-sm text-muted-foreground mt-1">{babyData.notes}</p>
                 </div>
               </>
             )}

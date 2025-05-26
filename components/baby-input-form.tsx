@@ -21,8 +21,8 @@ export function BabyInputForm({ onSubmit, isLoading = false }: BabyInputFormProp
     gender: "male",
     weight: 10,
     height: 75,
-    healthConditions: "",
-    allergies: "",
+    healthConditions: [],
+    allergies: [],
     notes: "",
     feedingMethod: "mixed",
     sleepHours: 12,
@@ -148,8 +148,8 @@ export function BabyInputForm({ onSubmit, isLoading = false }: BabyInputFormProp
               <Label htmlFor="healthConditions">健康状况</Label>
               <Textarea
                 id="healthConditions"
-                value={formData.healthConditions}
-                onChange={(e) => updateFormData('healthConditions', e.target.value)}
+                value={formData.healthConditions.join('\n')}
+                onChange={(e) => updateFormData('healthConditions', e.target.value.split('\n'))}
                 placeholder="请描述宝宝的健康状况，如有无感冒、发烧、湿疹等..."
                 className="min-h-[80px]"
               />
@@ -159,8 +159,8 @@ export function BabyInputForm({ onSubmit, isLoading = false }: BabyInputFormProp
               <Label htmlFor="allergies">过敏史</Label>
               <Textarea
                 id="allergies"
-                value={formData.allergies}
-                onChange={(e) => updateFormData('allergies', e.target.value)}
+                value={formData.allergies.join('\n')}
+                onChange={(e) => updateFormData('allergies', e.target.value.split('\n'))}
                 placeholder="请描述宝宝的过敏情况，如对牛奶、鸡蛋、坚果等的过敏..."
                 className="min-h-[80px]"
               />

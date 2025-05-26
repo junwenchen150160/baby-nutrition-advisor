@@ -12,7 +12,7 @@ export interface BabyData {
   height: number;
   feedingMethod: "breastfeeding" | "formula" | "mixed";
   sleepHours: number;
-  healthConditions: string;
-  allergies: string;
+  healthConditions: string[];
+  allergies: string[];
   notes: string;
 }

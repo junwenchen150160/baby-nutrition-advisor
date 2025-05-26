@@ -42,25 +42,25 @@ function analyzeSleepStatus(sleepHours: number, age: number): 'insufficient' | '
   return 'normal';
 }
 
-function analyzeHealthConditions(health: string, allergies: string): {
+function analyzeHealthConditions(health: string[], allergies: string[]): {
   hasEczema: boolean;
   hasDigestiveIssues: boolean;
   hasAllergies: string[];
   needsSpecialCare: boolean;
 } {
-  const healthLower = health.toLowerCase();
-  const allergiesLower = allergies.toLowerCase();
+  const healthText = health.join(' ').toLowerCase();
+  const allergiesText = allergies.join(' ').toLowerCase();
   
   return {
-    hasEczema: healthLower.includes('湿疹') || allergiesLower.includes('湿疹'),
-    hasDigestiveIssues: healthLower.includes('便秘') || healthLower.includes('腹泻') || healthLower.includes('消化'),
+    hasEczema: healthText.includes('湿疹') || allergiesText.includes('湿疹'),
+    hasDigestiveIssues: healthText.includes('便秘') || healthText.includes('腹泻') || healthText.includes('消化'),
     hasAllergies: [
-      allergiesLower.includes('牛奶') ? '牛奶' : '',
-      allergiesLower.includes('鸡蛋') ? '鸡蛋' : '',
-      allergiesLower.includes('坚果') ? '坚果' : '',
-      allergiesLower.includes('海鲜') ? '海鲜' : ''
+      allergiesText.includes('牛奶') ? '牛奶' : '',
+      allergiesText.includes('鸡蛋') ? '鸡蛋' : '',
+      allergiesText.includes('坚果') ? '坚果' : '',
+      allergiesText.includes('海鲜') ? '海鲜' : ''
     ].filter(Boolean),
-    needsSpecialCare: health.trim() !== '' || allergies.trim() !== ''
+    needsSpecialCare: health.length > 0 || allergies.length > 0
   };
 }
 
@@ -385,8 +385,8 @@ function generateRecommendationsByAge(age: number): RecommendationType {
     height: age * 2 + 50,
     feedingMethod: 'mixed',
     sleepHours: age < 6 ? 16 : age < 12 ? 14 : 13,
-    healthConditions: '',
-    allergies: '',
+    healthConditions: [],
+    allergies: [],
     notes: ''
   };
   
